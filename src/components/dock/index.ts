@@ -1,0 +1,5 @@
+export { Dock } from "./dock"
+export { DockButton } from "./dock-button"
+export { DockSeparator } from "./dock-separator"
+export { useDockContext } from "./dock-context"
+export { ThemeToggle } from "./theme-toggle"
