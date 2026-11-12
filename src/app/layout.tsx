@@ -15,12 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Charify - Image to ASCII Art",
+  title: "Vinoa - Image to ASCII Art",
   description:
     "Convert images to ASCII art with a beautiful, Excalidraw-inspired canvas interface. Drag & drop, paste, customize, and export.",
-  metadataBase: new URL("https://charify.rudro.dev"),
+  metadataBase: new URL("https://vinoa.vercel.app"),
   icons: {
-    icon: "/charify.png",
+    icon: "/vinoa.png",
   },
   keywords: [
     "ascii art",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://charify.rudro.dev",
-    siteName: "Charify",
-    title: "Charify - Image to ASCII Art",
+    url: "https://vinoa.vercel.app",
+    siteName: "Vinoa",
+    title: "Vinoa - Image to ASCII Art",
     description:
       "Convert images to ASCII art with a beautiful, Excalidraw-inspired canvas interface. Drag & drop, paste, customize, and export.",
     images: [
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Charify - Image to ASCII Art",
+        alt: "Vinoa - Image to ASCII Art",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Charify - Image to ASCII Art",
+    title: "Vinoa - Image to ASCII Art",
     description:
       "Convert images to ASCII art with a beautiful, Excalidraw-inspired canvas interface.",
     images: ["/og.png"],

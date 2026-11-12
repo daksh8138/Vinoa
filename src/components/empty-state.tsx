@@ -17,7 +17,7 @@ export function EmptyState() {
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-1">
           <h1 className="pointer-events-auto font-mono text-xl font-medium tracking-wide text-foreground">
-            <GlyphText text="charify" speed={0.25} />
+            <GlyphText text="vinoa" speed={0.25} />
           </h1>
           <p
             className="font-mono text-xs text-muted-foreground/70"

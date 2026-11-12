@@ -3,8 +3,10 @@
 import { useCallback, useState, useEffect, useRef } from "react"
 import type { DockPosition, Position } from "@/types/canvas"
 import { dockPhysics, type DockBounds, type DockOrientation, type SnapResult } from "@/lib/dock-physics"
+import { getStorageItemWithMigration } from "@/hooks/use-local-storage"
 
-const STORAGE_KEY = "charify-dock-position"
+const STORAGE_KEY = "vinoa-dock-position"
+const LEGACY_STORAGE_KEY = "charify-dock-position"
 
 type PendingSnap = {
   edge: DockPosition
@@ -43,7 +45,7 @@ function getDefaultState(initialPosition: DockPosition): DockState {
 function loadFromStorage(): Partial<StoredDockState> | null {
   if (typeof window === "undefined") return null
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = getStorageItemWithMigration(STORAGE_KEY, LEGACY_STORAGE_KEY)
     if (stored) {
       return JSON.parse(stored)
     }

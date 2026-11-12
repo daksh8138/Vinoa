@@ -4,6 +4,8 @@
 
 Transform images into ASCII art with an interactive, infinite canvas. Upload an image, customize its appearance, and export your creation in multiple formats.
 
+**Live:** [https://vinoa.vercel.app/](https://vinoa.vercel.app/)
+
 ## Features
 
 - Drag and drop or paste images (`Cmd/Ctrl + V`)
