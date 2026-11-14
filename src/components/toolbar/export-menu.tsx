@@ -1,6 +1,6 @@
 "use client"
 
-import { Download, Copy, FileText, FileCode, Image } from "lucide-react"
+import { Download, Copy, FileText, FileCode, ImageIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -63,7 +63,7 @@ export function ExportMenu({
           Copy as text
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onCopyPng}>
-          <Image className="mr-2 h-4 w-4" />
+          <ImageIcon className="mr-2 h-4 w-4" />
           Copy as PNG
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -77,7 +77,7 @@ export function ExportMenu({
           Export as .html
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onExportPng}>
-          <Image className="mr-2 h-4 w-4" />
+          <ImageIcon className="mr-2 h-4 w-4" />
           Export as .png
         </DropdownMenuItem>
       </DropdownMenuContent>

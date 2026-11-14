@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog"
 import { ShortcutKeys } from "@/components/ui/shortcut-keys"
 import {
-  shortcuts,
   shortcutCategories,
   getShortcutsByCategory,
 } from "@/lib/shortcuts"

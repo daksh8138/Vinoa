@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useRef, useEffect, useMemo } from "react"
+import { useCallback, useRef, useEffect, useMemo, useState } from "react"
 import { GripVertical } from "lucide-react"
 import type { DockPosition } from "@/types/canvas"
 import { cn } from "@/lib/utils"
@@ -31,6 +31,8 @@ export function Dock({ children, initialPosition = "bottom" }: DockProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const dockRef = useRef<HTMLDivElement>(null)
   const grabOffset = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
+  // Rendered (border-box) size of the dock, used to size the snap preview.
+  const [dockSize, setDockSize] = useState({ width: 200, height: 40 })
 
   useEffect(() => {
     const el = dockRef.current
@@ -39,6 +41,7 @@ export function Dock({ children, initialPosition = "bottom" }: DockProps) {
     const observer = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect
       setDockBounds({ width, height })
+      setDockSize({ width: el.offsetWidth, height: el.offsetHeight })
     })
 
     observer.observe(el)
@@ -196,12 +199,12 @@ export function Dock({ children, initialPosition = "bottom" }: DockProps) {
             ...snapPreviewStyle,
             width:
               pendingSnap.orientation === orientation
-                ? dockRef.current?.offsetWidth ?? 200
-                : dockRef.current?.offsetHeight ?? 40,
+                ? dockSize.width
+                : dockSize.height,
             height:
               pendingSnap.orientation === orientation
-                ? dockRef.current?.offsetHeight ?? 40
-                : dockRef.current?.offsetWidth ?? 200,
+                ? dockSize.height
+                : dockSize.width,
           }}
         />
       )}

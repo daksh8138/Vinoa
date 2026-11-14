@@ -5,7 +5,6 @@ import { useLocalStorage } from "@/hooks/use-local-storage"
 import type { AsciiOptions } from "@/types/canvas"
 
 const STORAGE_KEY = "vinoa-ascii-settings"
-const LEGACY_STORAGE_KEY = "charify-ascii-settings"
 
 const DEFAULT_OPTIONS: AsciiOptions = {
   width: 150,
@@ -19,8 +18,7 @@ const DEFAULT_OPTIONS: AsciiOptions = {
 export function useAsciiSettings() {
   const [options, setOptions] = useLocalStorage<AsciiOptions>(
     STORAGE_KEY,
-    DEFAULT_OPTIONS,
-    LEGACY_STORAGE_KEY
+    DEFAULT_OPTIONS
   )
 
   const updateOption = useCallback(

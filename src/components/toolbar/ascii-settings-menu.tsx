@@ -72,7 +72,8 @@ export function AsciiSettingsMenu({
           }
         >
           <DropdownMenuRadioItem value="standard" onSelect={(e) => e.preventDefault()}>Standard</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="blocks" onSelect={(e) => e.preventDefault()}>Blocks ░▒▓█</DropdownMenuRadioItem>
+          {/* Value stays "blocks" so settings already saved in localStorage keep working; the ramp is " .:oO8@#". */}
+          <DropdownMenuRadioItem value="blocks" onSelect={(e) => e.preventDefault()}>Bold .:oO8@#</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="minimal" onSelect={(e) => e.preventDefault()}>Minimal</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="detailed" onSelect={(e) => e.preventDefault()}>Detailed</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>

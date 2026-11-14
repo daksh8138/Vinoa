@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 
 const GLYPHS = "アイウエオカキクケコ░▒▓█▄▀■□●○◆◇0123456789@#$%&*"
 
+const PLACEHOLDER_GLYPHS = ["_", "_", "_", "_"]
+
 function generateGlyphs() {
   return Array.from({ length: 4 }, () =>
     GLYPHS[Math.floor(Math.random() * GLYPHS.length)]
@@ -25,28 +27,34 @@ export function GlyphText({
   animateOnLoad = true,
 }: GlyphTextProps) {
   const [animate, setAnimate] = useState(false)
-  const [chars, setChars] = useState(() =>
-    text.split("").map((char, index) => ({ char, index, glyphs: ["_", "_", "_", "_"] }))
-  )
+  // Random glyphs per character. Starts empty (placeholders) so server and
+  // client render the same markup; filled only on the client.
+  const [glyphs, setGlyphs] = useState<string[][]>([])
+  const chars = text.split("").map((char, index) => ({
+    char,
+    index,
+    glyphs: glyphs[index] ?? PLACEHOLDER_GLYPHS,
+  }))
 
   useEffect(() => {
-    setChars(text.split("").map((char, index) => ({ char, index, glyphs: generateGlyphs() })))
-    if (animateOnLoad) {
-      const timer = setTimeout(() => setAnimate(true), 100)
-      return () => clearTimeout(timer)
-    }
+    if (!animateOnLoad) return
+    const timer = setTimeout(() => {
+      setGlyphs(text.split("").map(() => generateGlyphs()))
+      setAnimate(true)
+    }, 100)
+    return () => clearTimeout(timer)
   }, [text, animateOnLoad])
 
   useEffect(() => {
     if (!animate) return
-    const duration = (speed * 1000) + (chars.length * 40) + 100
+    const duration = (speed * 1000) + (text.length * 40) + 100
     const timer = setTimeout(() => setAnimate(false), duration)
     return () => clearTimeout(timer)
-  }, [animate, speed, chars.length])
+  }, [animate, speed, text.length])
 
   const handleMouseEnter = useCallback(() => {
     if (animate) return
-    setChars(text.split("").map((char, index) => ({ char, index, glyphs: generateGlyphs() })))
+    setGlyphs(text.split("").map(() => generateGlyphs()))
     setAnimate(true)
   }, [animate, text])
 

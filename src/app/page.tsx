@@ -48,7 +48,7 @@ export default function Home() {
   } = useCanvas()
 
   const { options: asciiOptions, setOptions: setAsciiOptions } = useAsciiSettings()
-  const { initHistory, pushState, undo, redo, canUndo, canRedo, removeHistory } = useImageHistory()
+  const { initHistory, pushState, undo, redo, canUndo, canRedo } = useImageHistory()
   const [isGenerating, setIsGenerating] = useState(false)
   const [shortcutsOpen, setShortcutsOpen] = useState(false)
 

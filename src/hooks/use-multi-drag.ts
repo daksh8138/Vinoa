@@ -14,7 +14,6 @@ export function useMultiDrag({
   items,
   selectedItemIds,
   onUpdateItemsPositions,
-  onSelectItem,
 }: UseMultiDragOptions) {
   const [isMultiDragging, setIsMultiDragging] = useState(false)
   const dragStart = useRef<Position>({ x: 0, y: 0 })

@@ -29,8 +29,8 @@ export const metadata: Metadata = {
     "text art",
     "image to text",
   ],
-  authors: [{ name: "Rudro", url: "https://rudro.dev" }],
-  creator: "Rudro",
+  authors: [{ name: "Daksh Javaria" }],
+  creator: "Daksh Javaria",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -54,7 +54,6 @@ export const metadata: Metadata = {
     description:
       "Convert images to ASCII art with a beautiful, Excalidraw-inspired canvas interface.",
     images: ["/og.png"],
-    creator: "@notrudro",
   },
   robots: {
     index: true,

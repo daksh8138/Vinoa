@@ -10,14 +10,22 @@ Transform images into ASCII art with an interactive, infinite canvas. Upload an 
 
 - Drag and drop or paste images (`Cmd/Ctrl + V`)
 - Infinite canvas with pan and zoom
-- Customizable ASCII art generation
-- Multiple character sets and adjustable resolution
-- Image inversion support
-- Export creations as PNG or SVG
-- Copy generated artwork to clipboard
+- Customizable ASCII art generation: colored or grayscale output, optional dithering, brightness control
+- Four ASCII character sets (Standard, Bold `.:oO8@#`, Minimal, Detailed) and adjustable output width
+- Inverted brightness mapping, plus horizontal and vertical image flipping
+- Export generated artwork as PNG, plain text (`.txt`) or standalone HTML (`.html`)
+- Copy generated artwork to the clipboard as text or as a PNG image
 - Movable toolbar with snap zones
 - Dark and light themes
 - Keyboard shortcuts for common actions
+
+## Planned Features
+
+The following are **planned and not yet implemented**. They are not available in the current version.
+
+1. **SVG Export (planned):** Allow users to export generated ASCII artwork as scalable SVG files.
+2. **Block Character Sets (planned):** Introduce genuine Unicode block-character ramps such as ░, ▒, ▓ and █ for image-to-ASCII conversion.
+3. **Enhanced Motion and Animations (planned):** Introduce polished animations and interactions using the Motion library.
 
 ## Tech Stack
 
@@ -25,7 +33,8 @@ Transform images into ASCII art with an interactive, infinite canvas. Upload an 
 - **Frontend:** React 19, TypeScript
 - **Styling:** Tailwind CSS 4
 - **Components:** shadcn/ui
-- **Animations:** Motion
+
+The [Motion](https://motion.dev/) package is installed for the planned animation work above, but is not used in the current version.
 
 ## Getting Started
 

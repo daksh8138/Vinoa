@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "motion/react"
 import { GlyphText } from "./glyph-text"
 import { ShortcutKeys } from "./ui/shortcut-keys"
 import { shortcuts } from "@/lib/shortcuts"

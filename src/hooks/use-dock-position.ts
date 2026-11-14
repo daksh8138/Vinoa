@@ -1,12 +1,10 @@
 "use client"
 
-import { useCallback, useState, useEffect, useRef } from "react"
+import { useCallback, useState, useEffect, useRef, useSyncExternalStore } from "react"
 import type { DockPosition, Position } from "@/types/canvas"
-import { dockPhysics, type DockBounds, type DockOrientation, type SnapResult } from "@/lib/dock-physics"
-import { getStorageItemWithMigration } from "@/hooks/use-local-storage"
+import { dockPhysics, type DockBounds, type DockOrientation } from "@/lib/dock-physics"
 
 const STORAGE_KEY = "vinoa-dock-position"
-const LEGACY_STORAGE_KEY = "charify-dock-position"
 
 type PendingSnap = {
   edge: DockPosition
@@ -45,7 +43,7 @@ function getDefaultState(initialPosition: DockPosition): DockState {
 function loadFromStorage(): Partial<StoredDockState> | null {
   if (typeof window === "undefined") return null
   try {
-    const stored = getStorageItemWithMigration(STORAGE_KEY, LEGACY_STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
       return JSON.parse(stored)
     }
@@ -53,6 +51,10 @@ function loadFromStorage(): Partial<StoredDockState> | null {
     // Ignore
   }
   return null
+}
+
+function subscribeNoop() {
+  return () => {}
 }
 
 function saveToStorage(state: StoredDockState) {
@@ -68,7 +70,12 @@ export function useDockPosition(initialPosition: DockPosition = "bottom") {
   const [state, setState] = useState<DockState>(() => getDefaultState(initialPosition))
   const dockBoundsRef = useRef<DockBounds>({ width: 200, height: 40 })
 
-  useEffect(() => {
+  // false during SSR and hydration, true afterwards. Lets us apply the saved
+  // position once on the client without a hydration mismatch.
+  const isClient = useSyncExternalStore(subscribeNoop, () => true, () => false)
+  const [hasLoadedStored, setHasLoadedStored] = useState(false)
+  if (isClient && !hasLoadedStored) {
+    setHasLoadedStored(true)
     const stored = loadFromStorage()
     if (stored) {
       setState((prev) => ({
@@ -76,9 +83,11 @@ export function useDockPosition(initialPosition: DockPosition = "bottom") {
         ...stored,
       }))
     }
-  }, [])
+  }
 
   useEffect(() => {
+    // Don't overwrite the saved position with defaults before it has been read.
+    if (!hasLoadedStored) return
     if (!state.isDragging) {
       saveToStorage({
         position: state.position,
@@ -87,7 +96,7 @@ export function useDockPosition(initialPosition: DockPosition = "bottom") {
         orientation: state.orientation,
       })
     }
-  }, [state.position, state.snapEdge, state.edgeOffset, state.orientation, state.isDragging])
+  }, [hasLoadedStored, state.position, state.snapEdge, state.edgeOffset, state.orientation, state.isDragging])
 
   const setDockBounds = useCallback((bounds: DockBounds) => {
     dockBoundsRef.current = bounds

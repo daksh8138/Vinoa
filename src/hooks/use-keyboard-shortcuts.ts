@@ -13,7 +13,11 @@ type ShortcutAction = {
 
 export function useKeyboardShortcuts(shortcuts: ShortcutAction[]) {
   const shortcutsRef = useRef(shortcuts)
-  shortcutsRef.current = shortcuts
+
+  // Keep the latest shortcuts available to the long-lived keydown listener.
+  useEffect(() => {
+    shortcutsRef.current = shortcuts
+  })
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
